@@ -20,7 +20,7 @@ app.get('/story', (req, res) => {
 });
 
 app.post('/story', (req, res) => {
-  const newText = req.body && req.body.text;
+  const newText = req.body.text;
   if (!newText || newText.trim().length === 0) {
     return res.status(422).json({ message: 'Text must not be empty!' });
   }
