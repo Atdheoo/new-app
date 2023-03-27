@@ -20,8 +20,8 @@ app.get('/story', (req, res) => {
 });
 
 app.post('/story', (req, res) => {
-  const newText = req.body && req.body.text; // Modify this line
-  if (!newText || newText.trim().length === 0) { // Modify this line
+  const newText = req.body && req.body.text;
+  if (!newText || newText.trim().length === 0) {
     return res.status(422).json({ message: 'Text must not be empty!' });
   }
   fs.appendFile(filePath, newText + '\n', (err) => {
@@ -32,8 +32,10 @@ app.post('/story', (req, res) => {
   });
 });
 
-app.get('/error', () => {
+app.get('/error', (req, res) => { // Include the response parameter here
   process.exit(1);
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log('Server listening on port 3000.');
+});
