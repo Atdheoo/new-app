@@ -20,7 +20,7 @@ app.get('/story', (req, res) => {
 });
 
 app.post('/story', (req, res) => {
-  const newText = req.body.text;
+  const newText = req.body && req.body.text; // Use the `&&` operator here
   if (!newText || newText.trim().length === 0) {
     return res.status(422).json({ message: 'Text must not be empty!' });
   }
@@ -33,7 +33,7 @@ app.post('/story', (req, res) => {
 });
 
 app.get('/error', (req, res) => { // Include the response parameter here
-  process.exit(1);
+  res.status(500).json({ message: 'Something went wrong.' }); // Send a response instead of killing the process
 });
 
 app.listen(3000, () => {
