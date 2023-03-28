@@ -20,8 +20,8 @@ app.get('/story', (req, res) => {
 });
 
 app.post('/story', (req, res) => {
-  const newText = req.body.text;
-  if (newText.trim().length === 0) {
+  const newText = req.body && req.body.text; // Modify this line
+  if (!newText || newText.trim().length === 0) { // Modify this line
     return res.status(422).json({ message: 'Text must not be empty!' });
   }
   fs.appendFile(filePath, newText + '\n', (err) => {
